@@ -3,15 +3,15 @@ pipeline {
 
     parameters {
         string(
-            name: 'BACKEND_TAG',
-            defaultValue: 'latest',
-            description: 'Tag de l’image backend à déployer'
+            name: ‘BACKEND_TAG’,
+            defaultValue: ‘latest’,
+            description: ‘Tag de image backend a deployer’
         )
 
         string(
-            name: 'FRONTEND_TAG',
-            defaultValue: 'latest',
-            description: 'Tag de l’image frontend à déployer'
+            name: ‘FRONTEND_TAG’,
+            defaultValue: ‘latest’,
+            description: ‘Tag de image frontend a deployer’
         )
     }
 
@@ -28,7 +28,7 @@ pipeline {
         disableConcurrentBuilds()
         buildDiscarder(logRotator(numToKeepStr: '20'))
         timeout(time: 15, unit: 'MINUTES')
-        timestamps()
+        // timestamps() -- plugin Timestamper requis, désactivé
     }
 
     stages {
@@ -314,7 +314,7 @@ pipeline {
                         """
                     )
 
-                    echo 'Notification d'échec envoyée.'
+                    echo "Notification echec envoyee."
 
                 } catch (Exception e) {
                     echo "Échec de la notification : ${e.message}"
@@ -367,7 +367,7 @@ pipeline {
                         """
                     )
 
-                    echo 'Notification d'interruption envoyée.'
+                    echo "Notification interruption envoyee."
 
                 } catch (Exception e) {
                     echo "Échec de la notification : ${e.message}"
